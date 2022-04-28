@@ -23,14 +23,14 @@ data "aws_vpc" "spoke" {
 
 data "hcp_packer_iteration" "user" {
   bucket_name = "cadie-user"
-  channel     = var.environment
+  channel     = "dev"
 }
 
 data "hcp_packer_image" "user" {
   bucket_name    = "cadie-user"
   cloud_provider = "aws"
   iteration_id   = data.hcp_packer_iteration.user.ulid
-  region         = var.aws_region
+  region         = "us-east-1"
 }
 
 data "aws_subnets" "all" {
