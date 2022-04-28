@@ -21,6 +21,18 @@ data "aws_vpc" "spoke" {
   }
 }
 
+data "hcp_packer_iteration" "user" {
+  bucket_name = "cadie-user"
+  channel     = var.environment
+}
+
+data "hcp_packer_image" "user" {
+  bucket_name    = "cadie-user"
+  cloud_provider = "aws"
+  iteration_id   = data.hcp_packer_iteration.user.ulid
+  region         = var.aws_region
+}
+
 data "aws_subnets" "all" {
   filter {
     name   = "vpc-id"
