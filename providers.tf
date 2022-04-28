@@ -9,6 +9,7 @@ terraform {
 }
 
 provider "aws" {
+  region = "us-east-1"
   assume_role {
     role_arn     = "arn:aws:iam::218685523158:role/tfc_role"
     session_name = "network_hub"
