@@ -1,4 +1,5 @@
 module "ec2_instance" {
+  # checkov:skip=CKV_TF_1: "Allow module versions not commit hashes in module sources"
   source  = "terraform-aws-modules/ec2-instance/aws"
   version = ">= 3.0"
 
