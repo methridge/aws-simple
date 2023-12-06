@@ -11,10 +11,7 @@ vars:
 tasks:
   default:
     cmds:
-      - git add .
-      - git commit -m "{{.CURRENT_DATE}}"
-      - git push
-    silent: true
+      - task: pre
 
   hog:
     cmds:
@@ -25,8 +22,19 @@ tasks:
       - pre-commit autoupdate
       - pre-commit run -a
 
+  push:
+    cmds:
+      - git add .
+      - git commit -m "{{.CURRENT_DATE}}"
+      - git push
+    silent: true
+
   tag:
     cmds:
       - git push
       - git tag -s {{.CLI_ARGS}} -m "{{.CLI_ARGS}}"
       - git push --tags
+
+  tidy:
+    cmds:
+      - go mod tidy -v -x
