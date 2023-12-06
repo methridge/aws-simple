@@ -22,6 +22,7 @@ tasks:
 
   pre:
     cmds:
+      - pre-commit autoupdate
       - pre-commit run -a
 
   tag:
