@@ -37,3 +37,6 @@ terraform.rc
 
 # Exclude direnv config file
 .envrc
+
+# Exclue Infracost folder
+.infracost
