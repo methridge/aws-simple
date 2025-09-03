@@ -1,20 +1,26 @@
+# yaml-language-server: $schema=https://json.schemastore.org/pre-commit-config.json
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+
 repos:
   - repo: local
     hooks:
       - id: trufflehog
         name: TruffleHog
         description: Detect secrets in your data.
-        entry: trufflehog git file://. --since-commit HEAD --fail
-        language: golang
-        pass_filenames: false
+        entry:
+          bash -c 'trufflehog git file://. --since-commit HEAD
+          --results=verified,unknown --fail'
+        language: system
         stages: ["pre-commit", "pre-push"]
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v5.0.0
+    rev: v6.0.0
     hooks:
       - id: check-merge-conflict
       - id: end-of-file-fixer
+      - id: no-commit-to-branch
   - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.99.0
+    rev: v1.100.0
     hooks:
       - id: terraform_fmt
       - id: terraform_validate
